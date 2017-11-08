@@ -6,10 +6,12 @@
 #include "configuration.hpp"
 #include "rootWidget.hpp"
 
+typedef RootWidget *(*WindowInitializer)(const unsigned int, const unsigned int);
+
 class Window final
 {
 public:
-	Window();
+	Window(WindowInitializer initializer);
 	~Window();
 	void run();
 

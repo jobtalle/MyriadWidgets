@@ -40,7 +40,7 @@ void Window::mouseEnter(GLFWwindow *window, int entered)
 	static_cast<Window*>(glfwGetWindowUserPointer(window))->mouseEnter(entered == GLFW_TRUE);
 }
 
-Window::Window()
+Window::Window(WindowInitializer initializer)
 {
 	initializeGLFW();
 	initializeMyriad();
@@ -48,7 +48,7 @@ Window::Window()
 	double mouseX, mouseY;
 	glfwGetCursorPos(window, &mouseX, &mouseY);
 
-	// TODO: Instantiate content here. Content must be an extension of RootWidget.
+	content = initializer(renderer->getSize().getWidth(), renderer->getSize().getHeight());
 	content->mouseMove(static_cast<int>(mouseX), static_cast<int>(mouseY));
 
 	run();
